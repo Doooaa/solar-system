@@ -1,0 +1,11 @@
+name: first work flow
+
+# Start point
+on: push
+
+jobs:
+  first-job:
+    runs-on: windows-latest
+    steps:
+      - name: print my name
+        run: echo "ITI25"
