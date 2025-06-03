@@ -1,33 +1,21 @@
-# name: first work flow
-
-# # Start point
-# on: push
-
-# jobs:
-#   first-job:
-#     runs-on: windows-latest
-#     steps:
-#       - name: print my name
-#         run: echo "ITI25"
-name: CI Workflow
+name: Solar System App
 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-      - 'feature/*'
+      - "feature/*"
 
 jobs:
   unit-testing:
     name: Unit Testing
+    # matrix strategy di zy el for loop
     strategy:
       matrix:
         node_version: [18, 20]
         operating_system: [ubuntu-latest, macos-latest]
-    
     runs-on: ${{ matrix.operating_system }}
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
@@ -41,4 +29,12 @@ jobs:
         run: npm install
 
       - name: Run unit tests
+        # id: hamada
         run: npm test
+
+      - uses: actions/upload-artifact@v4
+        #if: steps.hamada == 'failure' || steps.hamada == 'success'
+        if: failure() || success()
+        with:
+          name: moch-test-result
+          path: test-results.xml
