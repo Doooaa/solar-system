@@ -10,7 +10,7 @@ on:
 jobs:
   unit-testing:
     name: Unit Testing
-    # matrix strategy di zy el for dd loop
+    # matrix strategy di zy el for dd loop f
     strategy:
       matrix:
         node_version: [18, 20]
